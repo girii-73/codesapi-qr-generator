@@ -17,19 +17,20 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "https://codesapiens-qr.vercel.app"
   ),
-  title: "CodeSapiens QR — Branded QR Code Generator",
+  title: "CodeSapiens QR Generator — Branded QR Code Generator",
   description:
     "Generate high-resolution, logo-embedded QR codes for the CodeSapiens developer community. Fast, free, and completely client-side.",
   openGraph: {
-    title: "CodeSapiens QR — Branded QR Code Generator",
+    title: "CodeSapiens QR Generator — Branded QR Code Generator",
     description:
       "Generate high-resolution, logo-embedded QR codes for the CodeSapiens developer community.",
     images: ["/codesapiens-logo.png"],
     type: "website",
   },
   icons: {
-    icon: "/codesapiens-logo.png",
-    apple: "/codesapiens-logo.png",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 };
 
@@ -57,11 +58,11 @@ export default function RootLayout({
               />
               <span className="text-lg font-semibold tracking-tight">
                 CodeSapiens{" "}
-                <span className="text-accent">QR</span>
+                <span className="text-accent">QR Generator</span>
               </span>
             </a>
             <a
-              href="https://github.com/codesapiens"
+              href="https://codesapiens.in/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-text-muted hover:text-text-secondary transition-colors"
