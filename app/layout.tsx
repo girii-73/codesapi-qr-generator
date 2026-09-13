@@ -14,13 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CodeSapiens QR — URL Shortener & QR Code Generator",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "https://codesapiens-qr.vercel.app"
+  ),
+  title: "CodeSapiens QR — Branded QR Code Generator",
   description:
-    "Shorten URLs and generate branded, logo-embedded QR codes for the CodeSapiens developer community. Fast, free, and open.",
+    "Generate high-resolution, logo-embedded QR codes for the CodeSapiens developer community. Fast, free, and completely client-side.",
   openGraph: {
-    title: "CodeSapiens QR — URL Shortener & QR Code Generator",
+    title: "CodeSapiens QR — Branded QR Code Generator",
     description:
-      "Shorten URLs and generate branded, logo-embedded QR codes for the CodeSapiens developer community.",
+      "Generate high-resolution, logo-embedded QR codes for the CodeSapiens developer community.",
     images: ["/codesapiens-logo.png"],
     type: "website",
   },
@@ -30,7 +33,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
