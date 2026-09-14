@@ -1,115 +1,94 @@
-"use client";
-
-import { useState } from "react";
-import LinkForm from "@/components/LinkForm";
 import QRGenerator from "@/components/QRGenerator";
-import CopyLinkButton from "@/components/CopyLinkButton";
-
-interface LinkResult {
-  code: string;
-  shortUrl: string;
-}
 
 export default function Home() {
-  const [result, setResult] = useState<LinkResult | null>(null);
-
   return (
-    <div className="mx-auto w-full max-w-2xl px-4 sm:px-6 py-12 sm:py-20">
+    <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 py-10 sm:py-16">
       {/* ── Hero ── */}
-      <section className="text-center mb-12 sm:mb-16">
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-          Shorten. Brand.{" "}
-          <span className="text-accent">Share.</span>
+      <section className="text-center mb-10 sm:mb-14">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+          Pure QR Code Generator
+        </div>
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
+          Brand Your Links with{" "}
+          <span className="text-accent">Custom QR Codes.</span>
         </h1>
-        <p className="text-lg sm:text-xl text-text-secondary max-w-lg mx-auto leading-relaxed">
-          Generate short links and logo-embedded QR codes for the CodeSapiens
-          community — in seconds.
+        <p className="text-base sm:text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
+          Generate logo-embedded, high-resolution QR codes for the CodeSapiens
+          developer community. Instant, client-side, and ready for print or digital.
         </p>
       </section>
 
-      {/* ── Form ── */}
-      <section className="mb-10">
-        <LinkForm
-          onSuccess={(data) => setResult(data)}
-        />
+      {/* ── QR Generator Workspace ── */}
+      <section className="mb-16">
+        <QRGenerator />
       </section>
 
-      {/* ── Result ── */}
-      {result && (
-        <section className="animate-fade-in space-y-8">
-          {/* Short link display */}
-          <div className="rounded-xl border border-border bg-bg-surface p-5">
-            <p className="text-xs text-text-muted uppercase tracking-wider mb-2">
-              Your short link
-            </p>
-            <div className="flex items-center gap-3 flex-wrap">
-              <a
-                href={result.shortUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent font-mono text-lg hover:underline underline-offset-4 break-all"
-              >
-                {result.shortUrl}
-              </a>
-              <CopyLinkButton shortUrl={result.shortUrl} />
-            </div>
-          </div>
+      {/* ── Feature Highlights ── */}
+      <section className="border-t border-border pt-14">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold tracking-tight mb-2">
+            Engineered for Developers & Community Events
+          </h2>
+          <p className="text-sm text-text-secondary">
+            Everything you need for clean, reliable, and branded QR codes.
+          </p>
+        </div>
 
-          {/* QR code */}
-          <div className="flex justify-center">
-            <QRGenerator shortUrl={result.shortUrl} />
-          </div>
-        </section>
-      )}
-
-      {/* ── Features hint ── */}
-      {!result && (
-        <section className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             {
+              title: "Client-Side & Fast",
+              desc: "Zero database required. Codes are rendered locally in your browser with zero latency.",
               icon: (
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.84-9.84l-4.5 4.5a4.5 4.5 0 00-1.242 7.244" />
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                 </svg>
               ),
-              title: "Instant Short Links",
-              desc: "Paste a URL and get a clean short link backed by Supabase.",
             },
             {
+              title: "Logo Embedded",
+              desc: "Embedded CodeSapiens badge or your own custom logo, centered with high-recovery margins.",
               icon: (
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75H16.5v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z" />
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
                 </svg>
               ),
-              title: "Branded QR Codes",
-              desc: "Logo-embedded QR codes with H-level error correction.",
             },
             {
+              title: "Level-H Redundancy",
+              desc: "Highest error correction level (30%) guarantees scanners can read your code in any lighting.",
               icon: (
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+              ),
+            },
+            {
+              title: "SVG & High-Res PNG",
+              desc: "Export 1200px PNGs or infinitely scalable vector SVGs perfect for conference badges and stickers.",
+              icon: (
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                 </svg>
               ),
-              title: "Multi-format Export",
-              desc: "Download as PNG, SVG, or JPEG — ready for print or digital.",
             },
           ].map((item) => (
             <div
               key={item.title}
-              className="rounded-xl border border-border bg-bg-surface/50 p-6 transition-colors hover:border-border-hover"
+              className="rounded-2xl border border-border bg-bg-surface/50 p-6 transition-all hover:border-border-hover"
             >
-              <div className="inline-flex items-center justify-center rounded-lg bg-accent-muted p-2.5 text-accent mb-3">
+              <div className="inline-flex items-center justify-center rounded-xl bg-accent-muted p-2.5 text-accent mb-3.5">
                 {item.icon}
               </div>
-              <h3 className="text-sm font-semibold mb-1">{item.title}</h3>
+              <h3 className="text-sm font-semibold mb-1.5">{item.title}</h3>
               <p className="text-xs text-text-muted leading-relaxed">
                 {item.desc}
               </p>
             </div>
           ))}
-        </section>
-      )}
+        </div>
+      </section>
     </div>
   );
 }
